@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SIRec — Revival Rec Room 2026</title>
+<style>
+  :root{
+    --orange: #FF7A1A;
+    --orange-dark: #E8600A;
+    --orange-deep: #C94E00;
+    --white: #FFFFFF;
+    --ink: #2B1600;
+    --ink-soft: #5C3A1E;
+    --line: #FFD9B0;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+
+  body{
+    margin:0;
+    background:var(--white);
+    color:var(--ink);
+    font-family: 'Trebuchet MS', 'Segoe UI', system-ui, sans-serif;
+    line-height:1.5;
+  }
+
+  h1,h2,h3{
+    font-family: 'Arial Black', 'Trebuchet MS', sans-serif;
+    margin:0;
+    letter-spacing:0.5px;
+  }
+
+  a{color:inherit;}
+
+  /* ---------- NAV ---------- */
+  nav{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:16px 6vw;
+    background:var(--orange);
+    border-bottom:4px solid var(--orange-deep);
+    position:sticky;
+    top:0;
+    z-index:50;
+    gap:16px;
+  }
+
+  /* ---------- LOGO ---------- */
+  .logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-size:24px;
+    font-weight:900;
+    color:var(--white);
+    text-decoration:none;
+  }
+  .logo-mark{
+    width:42px;
+    height:42px;
+    flex-shrink:0;
+  }
+  .logo-word{
+    display:flex;
+    flex-direction:column;
+    line-height:1;
+  }
+  .logo-word .main{
+    font-size:22px;
+    letter-spacing:0.5px;
+  }
+  .logo-word .sub{
+    font-family:'Trebuchet MS', sans-serif;
+    font-size:9.5px;
+    font-weight:700;
+    letter-spacing:1.5px;
+    color:rgba(255,255,255,0.85);
+    margin-top:2px;
+  }
+
+  nav .links{
+    display:flex;
+    gap:26px;
+    font-weight:700;
+    font-size:15px;
+    align-items:center;
+  }
+  nav .links a{
+    text-decoration:none;
+    color:var(--white);
+    padding:6px 2px;
+    border-bottom:3px solid transparent;
+    transition:border-color .15s ease, color .15s ease, opacity .15s ease;
+  }
+  nav .links a:hover{
+    color:var(--white);
+    border-color:var(--white);
+  }
+
+  .nav-right{
+    display:flex;
+    align-items:center;
+    gap:14px;
+  }
+
+  /* language toggle */
+  .lang-toggle{
+    display:flex;
+    border:2px solid var(--white);
+    border-radius:999px;
+    overflow:hidden;
+    font-size:13px;
+    font-weight:800;
+  }
+  .lang-toggle button{
+    border:none;
+    background:transparent;
+    color:var(--white);
+    padding:7px 14px;
+    cursor:pointer;
+    font-family:inherit;
+    font-weight:800;
+    transition:background .15s ease, color .15s ease;
+  }
+  .lang-toggle button.active{
+    background:var(--white);
+    color:var(--orange-deep);
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding:90px 6vw 80px;
+    text-align:center;
+    background:
+      radial-gradient(circle at 20% 20%, var(--line) 0, transparent 40%),
+      radial-gradient(circle at 85% 10%, var(--line) 0, transparent 35%),
+      var(--white);
+    position:relative;
+    overflow:hidden;
+  }
+  .hero .tag{
+    display:inline-block;
+    background:var(--orange);
+    color:var(--white);
+    font-weight:800;
+    padding:8px 18px;
+    border-radius:999px;
+    font-size:14px;
+    margin-bottom:24px;
+    box-shadow:0 4px 0 var(--orange-deep);
+  }
+  .hero h1{
+    font-size:clamp(38px, 7vw, 74px);
+    color:var(--ink);
+    line-height:1.05;
+  }
+  .hero h1 span{
+    color:var(--orange);
+    -webkit-text-stroke: 2px var(--orange-deep);
+  }
+  .hero p.sub{
+    max-width:620px;
+    margin:26px auto 0;
+    font-size:19px;
+    color:var(--ink-soft);
+  }
+  .hero .cta-row{
+    margin-top:38px;
+    display:flex;
+    gap:18px;
+    justify-content:center;
+    flex-wrap:wrap;
+  }
+
+  /* ---------- BUTTONS ---------- */
+  .btn{
+    background:var(--white);
+    color:var(--orange-deep);
+    border:3px solid var(--orange);
+    padding:16px 34px;
+    font-size:17px;
+    font-weight:900;
+    border-radius:14px;
+    cursor:pointer;
+    box-shadow:0 6px 0 var(--orange);
+    transition: transform .08s ease, box-shadow .08s ease;
+    font-family:inherit;
+    text-decoration:none;
+    display:inline-block;
+  }
+  .btn:hover{
+    transform:translateY(-2px);
+  }
+  .btn:active{
+    transform:translateY(4px);
+    box-shadow:0 2px 0 var(--orange);
+  }
+  .btn.secondary{
+    color:var(--ink-soft);
+    border-color:#FFC894;
+    box-shadow:0 6px 0 #FFC894;
+  }
+  .btn.small{
+    padding:10px 20px;
+    font-size:14px;
+    box-shadow:0 4px 0 var(--orange-deep);
+  }
+  nav .btn.small{
+    background:var(--white);
+    color:var(--orange-deep);
+    border-color:var(--white);
+    box-shadow:0 4px 0 var(--orange-deep);
+  }
+
+  /* ---------- SECTIONS ---------- */
+  section{
+    padding:70px 6vw;
+    max-width:1100px;
+    margin:0 auto;
+  }
+  .section-title{
+    text-align:center;
+    margin-bottom:12px;
+    font-size:clamp(28px,4vw,42px);
+  }
+  .section-sub{
+    text-align:center;
+    color:var(--ink-soft);
+    max-width:560px;
+    margin:0 auto 48px;
+  }
+
+  .steps{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:26px;
+  }
+  .panel{
+    background:var(--orange);
+    color:var(--white);
+    border-radius:20px;
+    padding:30px 26px;
+    box-shadow:0 8px 0 var(--orange-deep);
+  }
+  .panel .num{
+    font-size:14px;
+    font-weight:900;
+    background:var(--white);
+    color:var(--orange-deep);
+    display:inline-block;
+    padding:4px 12px;
+    border-radius:999px;
+    margin-bottom:16px;
+  }
+  .panel h3{
+    font-size:20px;
+    margin-bottom:10px;
+  }
+  .panel p{
+    font-size:15px;
+    opacity:.95;
+    margin:0;
+  }
+
+  /* ---------- STRIP ---------- */
+  .strip{
+    background:var(--orange);
+    padding:60px 6vw;
+  }
+  .strip-inner{
+    max-width:1100px;
+    margin:0 auto;
+  }
+  .strip h2{
+    color:var(--white);
+    text-align:center;
+    font-size:clamp(26px,4vw,38px);
+    margin-bottom:40px;
+  }
+  .feature-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:22px;
+  }
+  .feature-card{
+    background:var(--white);
+    border-radius:18px;
+    padding:26px;
+    box-shadow:0 6px 0 var(--orange-deep);
+  }
+  .feature-card h3{
+    color:var(--orange-deep);
+    font-size:18px;
+    margin-bottom:8px;
+  }
+  .feature-card p{
+    margin:0;
+    color:var(--ink-soft);
+    font-size:14.5px;
+  }
+
+  /* ---------- BETA FORM ---------- */
+  .beta{
+    padding:80px 6vw;
+    max-width:720px;
+    margin:0 auto;
+  }
+  .form-panel{
+    background:var(--orange);
+    border-radius:26px;
+    padding:44px clamp(24px,5vw,54px);
+    box-shadow:0 10px 0 var(--orange-deep);
+    color:var(--white);
+  }
+  .form-panel h2{
+    font-size:clamp(26px,4vw,34px);
+    margin-bottom:8px;
+  }
+  .form-panel p.lead{
+    margin:0 0 30px;
+    opacity:.95;
+  }
+
+  .field{
+    margin-bottom:20px;
+  }
+  .field label{
+    display:block;
+    font-weight:800;
+    font-size:14px;
+    margin-bottom:8px;
+  }
+  .field input,
+  .field textarea{
+    width:100%;
+    border:none;
+    border-radius:12px;
+    padding:14px 16px;
+    font-size:15px;
+    font-family:inherit;
+    background:var(--white);
+    color:var(--ink);
+    resize:vertical;
+  }
+  .field input:focus,
+  .field textarea:focus{
+    outline:3px solid var(--ink);
+    outline-offset:2px;
+  }
+  .field textarea{min-height:110px;}
+
+  .submit-row{
+    margin-top:30px;
+    display:flex;
+    justify-content:center;
+  }
+
+  .submit-row .btn{
+    width:100%;
+    max-width:320px;
+  }
+
+  /* ---------- RESULT MESSAGE ---------- */
+  #betaResult{
+    display:none;
+    margin-top:26px;
+    background:var(--white);
+    color:var(--orange-deep);
+    border-radius:14px;
+    padding:20px 22px;
+    font-weight:800;
+    text-align:center;
+    box-shadow:0 6px 0 var(--orange-deep);
+  }
+  #betaResult .small{
+    display:block;
+    margin-top:6px;
+    font-weight:600;
+    color:var(--ink-soft);
+    font-size:14px;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    padding:40px 6vw 60px;
+    text-align:center;
+    color:var(--ink-soft);
+    font-size:14px;
+    border-top:4px solid var(--orange);
+  }
+  footer .logo{
+    justify-content:center;
+    margin-bottom:14px;
+  }
+
+  @media (max-width:800px){
+    .steps, .feature-grid{grid-template-columns:1fr;}
+    nav .links{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#top" class="logo">
+    <svg class="logo-mark" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="cubeTop" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#FFB877"/>
+          <stop offset="100%" stop-color="#FF7A1A"/>
+        </linearGradient>
+        <linearGradient id="cubeLeft" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#E8600A"/>
+          <stop offset="100%" stop-color="#C94E00"/>
+        </linearGradient>
+        <linearGradient id="cubeRight" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#FF8C33"/>
+          <stop offset="100%" stop-color="#E8600A"/>
+        </linearGradient>
+      </defs>
+      <polygon points="32,4 58,18 32,32 6,18" fill="url(#cubeTop)"/>
+      <polygon points="6,18 32,32 32,60 6,46" fill="url(#cubeLeft)"/>
+      <polygon points="58,18 32,32 32,60 58,46" fill="url(#cubeRight)"/>
+      <polygon points="32,4 58,18 32,32 6,18" fill="none" stroke="#FFFFFF" stroke-width="1.5" opacity="0.5"/>
+    </svg>
+    <span class="logo-word">
+      <span class="main">SIRec</span>
+      <span class="sub" data-i18n="logoSub">REVIVAL PROJECT</span>
+    </span>
+  </a>
+  <div class="links">
+    <a href="#how" data-i18n="navHow">How it works</a>
+    <a href="#why" data-i18n="navWhy">Why SIRec</a>
+    <a href="#beta" data-i18n="navBeta">Beta test</a>
+  </div>
+  <div class="nav-right">
+    <div class="lang-toggle">
+      <button type="button" id="lang-en" class="active">EN</button>
+      <button type="button" id="lang-ru">RU</button>
+    </div>
+    <a href="#beta" class="btn small" data-i18n="navApply">Apply now</a>
+  </div>
+</nav>
+
+<section class="hero" id="top">
+  <span class="tag" data-i18n="heroTag">Revival Rec Room · 2026</span>
+  <h1 data-i18n-html="heroTitle">Bring back Rec Room<br><span>no mods, no downloads</span></h1>
+  <p class="sub" data-i18n="heroSub">
+    SIRec is a DNS-based solution that brings back the old Rec Room the way we remember it.
+    No modified clients, no sketchy installers — just switch your DNS and jump into the game as usual.
+  </p>
+  <div class="cta-row">
+    <a href="#beta" class="btn" data-i18n="heroApply">Apply for beta test</a>
+    <a href="#how" class="btn secondary" data-i18n="heroHow">How it works</a>
+  </div>
+</section>
+
+<section id="how">
+  <h2 class="section-title" data-i18n="howTitle">How it works</h2>
+  <p class="section-sub" data-i18n="howSub">The SIRec team runs its own servers and DNS routing, so Rec Room traffic goes through the revival infrastructure.</p>
+  <div class="steps">
+    <div class="panel">
+      <span class="num" data-i18n="step1num">Step 1</span>
+      <h3 data-i18n="step1title">Switch your DNS</h3>
+      <p data-i18n="step1text">Set the SIRec DNS server in your device or router settings. Instructions are sent once your application is approved.</p>
+    </div>
+    <div class="panel">
+      <span class="num" data-i18n="step2num">Step 2</span>
+      <h3 data-i18n="step2title">Open Rec Room</h3>
+      <p data-i18n="step2text">No mods, no patches, no third-party launchers. Just the regular official app.</p>
+    </div>
+    <div class="panel">
+      <span class="num" data-i18n="step3num">Step 3</span>
+      <h3 data-i18n="step3title">Play the Revival</h3>
+      <p data-i18n="step3text">Your traffic is automatically routed to SIRec's servers and you land in the restored 2026 revival version.</p>
+    </div>
+  </div>
+</section>
+
+<div class="strip" id="why">
+  <div class="strip-inner">
+    <h2 data-i18n="whyTitle">Why SIRec, not a mod</h2>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <h3 data-i18n="f1title">Nothing to download</h3>
+        <p data-i18n="f1text">Works on top of the official client — no modified executables or cracked builds required.</p>
+      </div>
+      <div class="feature-card">
+        <h3 data-i18n="f2title">Closed beta</h3>
+        <p data-i18n="f2text">We accept a limited number of players at a time to keep the servers stable.</p>
+      </div>
+      <div class="feature-card">
+        <h3 data-i18n="f3title">Built by fans</h3>
+        <p data-i18n="f3text">Run by people who missed the old Rec Room and decided to bring it back themselves.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section id="beta" class="beta">
+  <div class="form-panel">
+    <h2 data-i18n="formTitle">Beta test application</h2>
+    <p class="lead" data-i18n="formLead">Tell us a bit about yourself — every application is reviewed manually.</p>
+
+    <form id="betaForm">
+      <div class="field">
+        <label for="email" data-i18n="formEmail">Email address</label>
+        <input type="email" id="email" name="email" placeholder="you@example.com" required>
+      </div>
+
+      <div class="field">
+        <label for="discord" data-i18n="formDiscord">Discord username</label>
+        <input type="text" id="discord" name="discord" placeholder="username" required>
+      </div>
+
+      <div class="field">
+        <label for="reason" data-i18n="formReason">Why should you be accepted into the beta test?</label>
+        <textarea id="reason" name="reason" data-i18n-placeholder="formReasonPlaceholder" placeholder="Tell us why you want to join SIRec Beta..." required></textarea>
+      </div>
+
+      <div class="submit-row">
+        <button type="submit" class="btn" data-i18n="formSubmit">Send application</button>
+      </div>
+    </form>
+
+    <div id="betaResult"></div>
+  </div>
+</section>
+
+<footer>
+  <a href="#top" class="logo" style="justify-content:center;">
+    <svg class="logo-mark" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" width="34" height="34">
+      <polygon points="32,4 58,18 32,32 6,18" fill="#FF7A1A"/>
+      <polygon points="6,18 32,32 32,60 6,46" fill="#C94E00"/>
+      <polygon points="58,18 32,32 32,60 58,46" fill="#E8600A"/>
+    </svg>
+    <span class="logo-word"><span class="main">SIRec</span></span>
+  </a>
+  <p data-i18n="footerText">SIRec is a fan-made revival project. Not affiliated with Rec Room Inc.</p>
+</footer>
+
+<script>
+  const translations = {
+    en: {
+      logoSub: "REVIVAL PROJECT",
+      navHow: "How it works",
+      navWhy: "Why SIRec",
+      navBeta: "Beta test",
+      navApply: "Apply now",
+      heroTag: "Revival Rec Room · 2026",
+      heroTitle: 'Bring back Rec Room<br><span>no mods, no downloads</span>',
+      heroSub: "SIRec is a DNS-based solution that brings back the old Rec Room the way we remember it. No modified clients, no sketchy installers — just switch your DNS and jump into the game as usual.",
+      heroApply: "Apply for beta test",
+      heroHow: "How it works",
+      howTitle: "How it works",
+      howSub: "The SIRec team runs its own servers and DNS routing, so Rec Room traffic goes through the revival infrastructure.",
+      step1num: "Step 1",
+      step1title: "Switch your DNS",
+      step1text: "Set the SIRec DNS server in your device or router settings. Instructions are sent once your application is approved.",
+      step2num: "Step 2",
+      step2title: "Open Rec Room",
+      step2text: "No mods, no patches, no third-party launchers. Just the regular official app.",
+      step3num: "Step 3",
+      step3title: "Play the Revival",
+      step3text: "Your traffic is automatically routed to SIRec's servers and you land in the restored 2026 revival version.",
+      whyTitle: "Why SIRec, not a mod",
+      f1title: "Nothing to download",
+      f1text: "Works on top of the official client — no modified executables or cracked builds required.",
+      f2title: "Closed beta",
+      f2text: "We accept a limited number of players at a time to keep the servers stable.",
+      f3title: "Built by fans",
+      f3text: "Run by people who missed the old Rec Room and decided to bring it back themselves.",
+      formTitle: "Beta test application",
+      formLead: "Tell us a bit about yourself — every application is reviewed manually.",
+      formEmail: "Email address",
+      formDiscord: "Discord username",
+      formReason: "Why should you be accepted into the beta test?",
+      formReasonPlaceholder: "Tell us why you want to join SIRec Beta...",
+      formSubmit: "Send application",
+      footerText: "SIRec is a fan-made revival project. Not affiliated with Rec Room Inc.",
+      resultTitle: "Beta test applications are currently closed. Sorry!",
+      resultSub: "All spots for the current SIRec Beta wave are taken. Keep an eye on our Discord — the next round will open soon."
+    },
+    ru: {
+      logoSub: "REVIVAL ПРОЕКТ",
+      navHow: "Как это работает",
+      navWhy: "Почему SIRec",
+      navBeta: "Бета-тест",
+      navApply: "Подать заявку",
+      heroTag: "Revival Rec Room · 2026",
+      heroTitle: 'Верни Rec Room<br><span>без модов и загрузок</span>',
+      heroSub: "SIRec — это DNS-решение, которое возвращает старый Rec Room таким, каким мы его помним. Никаких модифицированных клиентов и подозрительных установок — просто меняешь DNS и заходишь в игру как обычно.",
+      heroApply: "Подать заявку на бета-тест",
+      heroHow: "Как это работает",
+      howTitle: "Как это работает",
+      howSub: "Команда SIRec подняла собственные сервера и настроила DNS-маршрутизацию, чтобы трафик Rec Room шёл через revival-инфраструктуру.",
+      step1num: "Шаг 1",
+      step1title: "Меняешь DNS",
+      step1text: "Указываешь DNS-сервер SIRec в настройках устройства или роутера. Инструкция выдаётся после одобрения заявки.",
+      step2num: "Шаг 2",
+      step2title: "Открываешь Rec Room",
+      step2text: "Никаких модов, патчей и сторонних лаунчеров. Используешь обычное официальное приложение.",
+      step3num: "Шаг 3",
+      step3title: "Играешь в Revival",
+      step3text: "Трафик автоматически уходит на сервера SIRec, и ты попадаешь в восстановленную версию 2026 года.",
+      whyTitle: "Почему SIRec, а не мод",
+      f1title: "Ничего не скачивается",
+      f1text: "Работает поверх официального клиента — не нужно ставить модифицированные exe-файлы или взломанные сборки.",
+      f2title: "Закрытая бета",
+      f2text: "Мы принимаем ограниченное число игроков за раз, чтобы сервера оставались стабильными.",
+      f3title: "Сделано фанатами",
+      f3text: "Проект ведут люди, которые сами скучали по старому Rec Room и решили поднять его заново.",
+      formTitle: "Заявка на бета-тест",
+      formLead: "Расскажи немного о себе — мы рассматриваем каждую заявку вручную.",
+      formEmail: "Электронная почта",
+      formDiscord: "Юзернейм в Discord",
+      formReason: "Почему тебя нужно принять в бета-тест?",
+      formReasonPlaceholder: "Расскажи, почему ты хочешь попасть в SIRec Beta...",
+      formSubmit: "Отправить заявку",
+      footerText: "SIRec — фанатский revival-проект. Не связан с Rec Room Inc.",
+      resultTitle: "Приём заявок на бета-тест закрыт. Извините!",
+      resultSub: "Все слоты на текущую волну SIRec Beta уже заняты. Следи за Discord — набор откроется снова."
+    }
+  };
+
+  let currentLang = 'en';
+
+  function applyLang(lang){
+    currentLang = lang;
+    const dict = translations[lang];
+
+    document.querySelectorAll('[data-i18n]').forEach(el=>{
+      const key = el.getAttribute('data-i18n');
+      if(dict[key] !== undefined) el.textContent = dict[key];
+    });
+
+    document.querySelectorAll('[data-i18n-html]').forEach(el=>{
+      const key = el.getAttribute('data-i18n-html');
+      if(dict[key] !== undefined) el.innerHTML = dict[key];
+    });
+
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{
+      const key = el.getAttribute('data-i18n-placeholder');
+      if(dict[key] !== undefined) el.setAttribute('placeholder', dict[key]);
+    });
+
+    document.getElementById('lang-en').classList.toggle('active', lang === 'en');
+    document.getElementById('lang-ru').classList.toggle('active', lang === 'ru');
+    document.documentElement.lang = lang;
+
+    const result = document.getElementById('betaResult');
+    result.style.display = 'none';
+  }
+
+  document.getElementById('lang-en').addEventListener('click', ()=>applyLang('en'));
+  document.getElementById('lang-ru').addEventListener('click', ()=>applyLang('ru'));
+
+  const form = document.getElementById('betaForm');
+  const result = document.getElementById('betaResult');
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    const dict = translations[currentLang];
+
+    result.innerHTML = dict.resultTitle + '<span class="small">' + dict.resultSub + '</span>';
+    result.style.display = 'block';
+
+    result.scrollIntoView({behavior:'smooth', block:'center'});
+  });
+</script>
+
+</body>
+  </html>
